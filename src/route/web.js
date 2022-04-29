@@ -1,7 +1,7 @@
 import express from "express";
 import homeController from "../controllers/homeController";
 import userController from "../controllers/userController";
-import doctorController from "../controllers/doctorController";
+import coachController from "../controllers/coachController";
 import bookingController from "../controllers/bookingController";
 
 let router = express.Router();
@@ -23,19 +23,19 @@ let initWebRoutes = (app) => {
   router.delete("/api/delete-user", userController.handleDeleteUser);
 
   router.get("/api/allcode", userController.getAllCode);
-  router.get("/api/top-doctor-home", doctorController.getTopDoctorHome);
-  router.get("/api/allDoctor", doctorController.getAllDoctor);
-  router.post("/api/save-infor-doctor", doctorController.postInforDoctor);
-  router.get("/api/get-detail-doctor", doctorController.getDetailDoctorById);
-  router.post("/api/save-schedule-doctor", doctorController.saveScheduleDoctor);
-  router.get("/api/get-schedule-doctor", doctorController.getScheduleDoctor);
-  router.get("/api/get-profile-coach", doctorController.getProfileCoach);
-  router.get("/api/get-list-booking", doctorController.getListBooking);
+  router.get("/api/top-doctor-home", coachController.getTopCoachHome);
+  router.get("/api/allDoctor", coachController.getAllCoach);
+  router.post("/api/save-infor-doctor", coachController.postInforCoach);
+  router.get("/api/get-detail-doctor", coachController.getDetailCoachById);
+  router.post("/api/save-schedule-doctor", coachController.saveScheduleCoach);
+  router.get("/api/get-schedule-doctor", coachController.getScheduleCoach);
+  router.get("/api/get-profile-coach", coachController.getProfileCoach);
+  router.get("/api/get-list-booking", coachController.getListBooking);
   router.post(
     "/api/confirm-booking-by-coach",
-    doctorController.confirmBookingByCoach
+    coachController.confirmBookingByCoach
   );
-  router.get("/api/get-all-coach", doctorController.getAllCoach);
+  router.get("/api/get-all-coach", coachController.getAllCoach);
 
   router.post("/api/booking-user", bookingController.postBookingUser);
 

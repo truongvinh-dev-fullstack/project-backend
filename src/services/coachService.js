@@ -3,7 +3,7 @@ import db from "../models/index";
 import _ from "lodash";
 import emailService from "./emailService";
 
-let getTopDoctorHome = (limit) => {
+let getTopCoachHome = (limit) => {
   return new Promise(async (resole, reject) => {
     try {
       let users = await db.User.findAll({
@@ -34,7 +34,7 @@ let getTopDoctorHome = (limit) => {
   });
 };
 
-let getAllDoctor = () => {
+let getAllCoach = () => {
   return new Promise(async (resole, reject) => {
     try {
       let doctors = await db.User.findAll({
@@ -53,7 +53,7 @@ let getAllDoctor = () => {
   });
 };
 
-let saveDetailInforDoctor = (data) => {
+let saveDetailInforCoach = (data) => {
   return new Promise(async (resole, reject) => {
     try {
       if (!data.coachId || !data.contentHTML || !data.contentMarkdown) {
@@ -87,8 +87,10 @@ let saveDetailInforDoctor = (data) => {
           raw: false,
         });
 
+        let price = parseInt(data.price);
+
         if (!doctorPrice) {
-          await db.Markdown.Coach_info({
+          await db.Coach_info.create({
             coachId: data.coachId,
             price: data.price,
           });
@@ -108,7 +110,7 @@ let saveDetailInforDoctor = (data) => {
   });
 };
 
-let getDetailDoctorById = (id) => {
+let getDetailCoachById = (id) => {
   return new Promise(async (resole, reject) => {
     try {
       if (!id) {
@@ -159,7 +161,7 @@ let getDetailDoctorById = (id) => {
   });
 };
 
-let saveScheduleDoctorService = (data) => {
+let saveScheduleCoachService = (data) => {
   return new Promise(async (resole, reject) => {
     try {
       if (data && data.length > 0) {
@@ -194,7 +196,7 @@ let saveScheduleDoctorService = (data) => {
   });
 };
 
-let getScheduleDoctor = (coachId, date) => {
+let getScheduleCoach = (coachId, date) => {
   return new Promise(async (resole, reject) => {
     try {
       if (coachId && date) {
@@ -386,7 +388,7 @@ let getAllCoachService = () => {
     try {
       let allCoach = await db.User.findAll({
         where: { roleId: "R2" },
-        attributes: ["id", "email"],
+        attributes: ["id", "email", "firstname", "lastname"],
       });
       if (allCoach) {
         resolve({
@@ -407,12 +409,12 @@ let getAllCoachService = () => {
 };
 
 module.exports = {
-  getTopDoctorHome: getTopDoctorHome,
-  getAllDoctor: getAllDoctor,
-  saveDetailInforDoctor: saveDetailInforDoctor,
-  getDetailDoctorById: getDetailDoctorById,
-  saveScheduleDoctorService: saveScheduleDoctorService,
-  getScheduleDoctor: getScheduleDoctor,
+  getTopCoachHome: getTopCoachHome,
+  getAllCoach: getAllCoach,
+  saveDetailInforCoach: saveDetailInforCoach,
+  getDetailCoachById: getDetailCoachById,
+  saveScheduleCoachService: saveScheduleCoachService,
+  getScheduleCoach: getScheduleCoach,
   getProfileCoachById: getProfileCoachById,
   getListBookingService: getListBookingService,
   confirmBookingByCoach: confirmBookingByCoach,

@@ -86,6 +86,9 @@ let getAllUsers = (userId) => {
           },
           raw: true,
         });
+        let allUserNew = users.filter((item) => item.roleId !== "R3");
+
+        users = allUserNew;
       }
       if (userId && userId !== "ALL") {
         users = await db.User.findOne({
@@ -108,24 +111,24 @@ const createNewUser = (data) => {
           errCode: 1,
           message: "Your email is already is used!",
         });
+      } else {
+        let hashPasswprdFromBcrypt = await hashUserPassword(data.password);
+        await db.User.create({
+          email: data.email,
+          password: hashPasswprdFromBcrypt,
+          firstname: data.firstname,
+          lastname: data.lastname,
+          address: data.address,
+          phonenumber: data.phonenumber,
+          gender: data.gender,
+          roleId: data.roleId,
+          image: data.image,
+        });
+        resolve({
+          errCode: 0,
+          message: "OK",
+        });
       }
-      let hashPasswprdFromBcrypt = await hashUserPassword(data.password);
-      await db.User.create({
-        email: data.email,
-        password: hashPasswprdFromBcrypt,
-        firstname: data.firstname,
-        lastname: data.lastname,
-        address: data.address,
-        phonenumber: data.phonenumber,
-        gender: data.gender,
-        roleId: data.roleId,
-        image: data.image,
-      });
-
-      resolve({
-        errCode: 0,
-        message: "OK",
-      });
     } catch (error) {
       console.log("false");
       reject(error);

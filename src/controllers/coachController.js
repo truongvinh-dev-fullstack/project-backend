@@ -1,10 +1,10 @@
-import doctorService from "../services/doctorService";
+import coachService from "../services/coachService";
 
-let getTopDoctorHome = async (req, res) => {
+let getTopCoachHome = async (req, res) => {
   let limit = req.query.limit;
   if (limit) limit = 10;
   try {
-    let response = await doctorService.getTopDoctorHome(+limit);
+    let response = await coachService.getTopCoachHome(+limit);
     return res.status(200).json(response);
   } catch (e) {
     console.log(e);
@@ -15,9 +15,9 @@ let getTopDoctorHome = async (req, res) => {
   }
 };
 
-let getAllDoctor = async (req, res) => {
+let getAllCoachDetail = async (req, res) => {
   try {
-    let response = await doctorService.getAllDoctor();
+    let response = await coachService.getAllCoach();
     return res.status(200).json(response);
   } catch (e) {
     console.log(e);
@@ -28,9 +28,9 @@ let getAllDoctor = async (req, res) => {
   }
 };
 
-let postInforDoctor = async (req, res) => {
+let postInforCoach = async (req, res) => {
   try {
-    let response = await doctorService.saveDetailInforDoctor(req.body);
+    let response = await coachService.saveDetailInforCoach(req.body);
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
@@ -41,9 +41,9 @@ let postInforDoctor = async (req, res) => {
   }
 };
 
-let getDetailDoctorById = async (req, res) => {
+let getDetailCoachById = async (req, res) => {
   try {
-    let info = await doctorService.getDetailDoctorById(req.query.id);
+    let info = await coachService.getDetailCoachById(req.query.id);
     return res.status(200).json(info);
   } catch (e) {
     console.log(e);
@@ -54,9 +54,9 @@ let getDetailDoctorById = async (req, res) => {
   }
 };
 
-let saveScheduleDoctor = async (req, res) => {
+let saveScheduleCoach = async (req, res) => {
   try {
-    let response = await doctorService.saveScheduleDoctorService(req.body);
+    let response = await coachService.saveScheduleCoachService(req.body);
     return res.status(200).json(response);
   } catch (e) {
     console.log(e);
@@ -67,9 +67,9 @@ let saveScheduleDoctor = async (req, res) => {
   }
 };
 
-let getScheduleDoctor = async (req, res) => {
+let getScheduleCoach = async (req, res) => {
   try {
-    let response = await doctorService.getScheduleDoctor(
+    let response = await coachService.getScheduleCoach(
       req.query.doctorId,
       req.query.date
     );
@@ -91,7 +91,7 @@ let getProfileCoach = async (req, res) => {
         message: "Missing Id",
       });
     } else {
-      let message = await doctorService.getProfileCoachById(req.query.id);
+      let message = await coachService.getProfileCoachById(req.query.id);
       return res.status(200).json(message);
     }
   } catch (error) {
@@ -104,7 +104,7 @@ let getProfileCoach = async (req, res) => {
 
 let getListBooking = async (req, res) => {
   try {
-    let message = await doctorService.getListBookingService(
+    let message = await coachService.getListBookingService(
       req.query.coachId,
       req.query.date
     );
@@ -119,7 +119,7 @@ let getListBooking = async (req, res) => {
 
 let confirmBookingByCoach = async (req, res) => {
   try {
-    let message = await doctorService.confirmBookingByCoach(req.body);
+    let message = await coachService.confirmBookingByCoach(req.body);
     return res.status(200).json(message);
   } catch (error) {
     return res.status(200).json({
@@ -131,7 +131,7 @@ let confirmBookingByCoach = async (req, res) => {
 
 let getAllCoach = async (req, res) => {
   try {
-    let message = await doctorService.getAllCoachService();
+    let message = await coachService.getAllCoachService();
     return res.status(200).json(message);
   } catch (error) {
     return res.status(200).json({
@@ -142,12 +142,12 @@ let getAllCoach = async (req, res) => {
 };
 
 module.exports = {
-  getTopDoctorHome: getTopDoctorHome,
-  getAllDoctor: getAllDoctor,
-  postInforDoctor: postInforDoctor,
-  getDetailDoctorById: getDetailDoctorById,
-  saveScheduleDoctor: saveScheduleDoctor,
-  getScheduleDoctor: getScheduleDoctor,
+  getTopCoachHome: getTopCoachHome,
+  getAllCoachDetail: getAllCoachDetail,
+  postInforCoach: postInforCoach,
+  getDetailCoachById: getDetailCoachById,
+  saveScheduleCoach: saveScheduleCoach,
+  getScheduleCoach: getScheduleCoach,
   getProfileCoach: getProfileCoach,
   getListBooking: getListBooking,
   confirmBookingByCoach: confirmBookingByCoach,

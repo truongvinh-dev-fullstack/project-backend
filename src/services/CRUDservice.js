@@ -1,6 +1,5 @@
 import db from "../models/index";
 import bcrypt from "bcryptjs";
-import { reject } from "bcrypt/promises";
 
 var salt = bcrypt.genSaltSync(10);
 
